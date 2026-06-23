@@ -1,33 +1,34 @@
 # Reinforcement Learning Lab
 
-A Python reinforcement learning laboratory containing model-free agents (tabular Q-Learning and SARSA) designed to solve pathfinding tasks in discrete grid worlds, built from scratch using NumPy.
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square)
 
-## Project Structure
+Tabular **model-free reinforcement learning** agents — **Q-Learning** and **SARSA** — implemented
+from scratch in NumPy on a custom GridWorld, to study how on-policy vs off-policy updates and
+ε-greedy exploration affect convergence.
+
+![Reward curve](reward_curve.png)
+
+## Environment
+- **Grid:** 5×5, state = `(x, y)`.
+- **Start** `(0,0)` · **Goal** `(4,4)` `+10` · **Pit** `(2,2)` `−10`.
+- **Actions:** up / down / left / right.
+- **Exploration:** ε-greedy, decaying exponentially 1.0 → 0.05.
+
+## Run
+```bash
+pip install -r requirements.txt
+python q_learning.py     # trains over episodes, prints learned Q-grid, saves reward_curve.png
 ```
-Reinforcement-Learning-Lab/
-├── gridworld.py       # Custom Gym-style discrete grid environment
-├── q_learning.py      # Q-learning and SARSA tabular update runners
-├── requirements.txt   # Core Python dependencies
-└── README.md          # Setup and reinforcement boundaries guide
+
+## Files
+```
+gridworld.py    # custom discrete Gym-style environment
+q_learning.py   # Q-learning + SARSA tabular updates
 ```
 
-## Setup & Running
-
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Run training simulations (runs Q-learning updates over 1000 episodes on a 5x5 Gridworld grid, then exports convergence statistics):
-   ```bash
-   python q_learning.py
-   ```
-3. The script will save `reward_curve.png` and output the learned Q-value grid in your terminal console.
-
-## Environment Details
-- **Grid Layout:** 5x5 grid cells. State is coordinate tuple `(x, y)`.
-- **States:** 
-  - Start: `(0, 0)`
-  - Goal: `(4, 4)` (Reward: `+10`)
-  - Pit: `(2, 2)` (Reward: `-10`)
-- **Actions:** Discrete directional moves: Up (0), Down (1), Left (2), Right (3).
-- **Decay:** $\epsilon$-greedy exploration decaying exponentially from 1.0 to 0.05.
+## Why
+Reinforcement learning is easiest to *trust* once you've built the update rule yourself. This lab
+implements the Bellman backups directly and visualizes how the policy and value estimates evolve —
+no library doing the learning for you.
